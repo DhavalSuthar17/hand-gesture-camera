@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description"
+    content="FRAME — Hand-gesture camera app that applies live visual effects inside a shape formed by your fingers." />
+  <title>FRAME — Hand Gesture Camera</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Hidden video source -->
+  <video id="input" autoplay playsinline muted></video>
+
+  <!-- Main output canvas -->
+  <canvas id="output"></canvas>
+
+  <!-- Shutter flash overlay -->
+  <div class="shutter-flash" id="shutter-flash"></div>
+
+  <!-- Loading screen -->
+  <div id="loading-screen">
+    <div class="loader-ring"></div>
+    <p class="loader-text" id="loading-text">Initializing camera…</p>
+  </div>
+
+  <!-- Error screen -->
+  <div id="error-screen">
+    <div class="error-icon">📷</div>
+    <div class="error-title" id="error-title">Camera Error</div>
+    <div class="error-message" id="error-message">Something went wrong.</div>
+    <button class="retry-btn" onclick="location.reload()">Try Again</button>
+  </div>
+
+  <!-- Countdown overlay -->
+  <div class="countdown" id="countdown"></div>
+
+  <!-- HUD Overlay -->
+  <div class="hud" id="hud">
+    <!-- Top bar -->
+    <div class="hud-top">
+      <div class="status-pill" id="status-pill">
+        <span class="status-dot"></span>
+        <span id="status-text">Waiting for hands…</span>
+      </div>
+
+      <div class="effect-selector" id="effect-selector">
+        <button class="effect-btn active" data-effect="pop">Pop</button>
+        <button class="effect-btn" data-effect="blur">Blur</button>
+        <button class="effect-btn" data-effect="invert">Invert</button>
+        <button class="effect-btn" data-effect="thermal">Thermal</button>
+        <button class="effect-btn" data-effect="pixelate">Pixel</button>
+      </div>
+    </div>
+
+    <!-- Bottom controls -->
+    <div class="hud-bottom">
+      <div class="gallery-thumb" id="gallery-thumb" title="Last capture">
+        <img id="gallery-img" alt="Last capture" />
+      </div>
+
+      <button class="hud-btn" id="flip-btn" title="Flip camera">🔄</button>
+      <button class="shutter-btn" id="shutter-btn" title="Take photo"></button>
+      <button class="record-btn" id="record-btn" title="Record video"></button>
+
+      <div style="width:48px;"></div> <!-- spacer -->
+    </div>
+  </div>
+
+  <!-- Recording timer -->
+  <div class="rec-timer" id="rec-timer">00:00</div>
+
+  <script type="module" src="app.js"></script>
+</body>
+
+</html>
